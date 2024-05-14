@@ -130,7 +130,7 @@ func TestCreateRemoteJwksShouldCreateExpectedJwks(t *testing.T) {
 
 	client := &http.Client{}
 
-	logtoClient.httpClient = client
+	logtoClient.HttpClient = client
 
 	jwks, createRemoteJwksErr := logtoClient.createRemoteJwks(jwksUri)
 	assert.Nil(t, createRemoteJwksErr)

@@ -17,7 +17,7 @@ type AccessToken struct {
 }
 
 type LogtoClient struct {
-	httpClient     *http.Client
+	HttpClient     *http.Client
 	logtoConfig    *LogtoConfig
 	storage        Storage
 	accessTokenMap map[string]AccessToken
@@ -26,7 +26,7 @@ type LogtoClient struct {
 func NewLogtoClient(config *LogtoConfig, storage Storage) *LogtoClient {
 	config.normalized()
 	logtoClient := LogtoClient{
-		httpClient:     &http.Client{},
+		HttpClient:     &http.Client{},
 		logtoConfig:    config,
 		storage:        storage,
 		accessTokenMap: make(map[string]AccessToken),
@@ -122,7 +122,7 @@ func (logtoClient *LogtoClient) getAccessToken(resource string, organizationId s
 		return AccessToken{}, fetchOidcConfigErr
 	}
 
-	refreshedToken, refreshTokenErr := core.FetchTokenByRefreshToken(logtoClient.httpClient, &core.FetchTokenByRefreshTokenOptions{
+	refreshedToken, refreshTokenErr := core.FetchTokenByRefreshToken(logtoClient.HttpClient, &core.FetchTokenByRefreshTokenOptions{
 		TokenEndpoint:  oidcConfig.TokenEndpoint,
 		ClientId:       logtoClient.logtoConfig.AppId,
 		ClientSecret:   logtoClient.logtoConfig.AppSecret,
